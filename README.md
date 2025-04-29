@@ -9,6 +9,7 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn)
 ![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter)
 
+> 📦 This is a portfolio project showcasing API development, deployment, and JWT-based auth using FastAPI + Poetry.
 
 Simple API built with [FastAPI](https://fastapi.tiangolo.com/) for real-time predictions on the [Iris flower dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) using a trained Logistic Regression model.
 
@@ -139,7 +140,7 @@ Or preview the table using SQLite:
 
 FastAPI automatically provides Swagger UI:
 
-- [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) (if running locally) or use the deployed URL's `/docs` if hosted
 
 ![Docs UI](assets/docs-page.png)
 
@@ -207,6 +208,8 @@ The `render.yaml` file contains configuration for:
 
 No additional configuration is required.
 
+> **Note:** Render automatically rebuilds and deploys the service whenever new commits are pushed to the `main` branch.
+
 ---
 
 ## Setup
@@ -240,7 +243,9 @@ poetry run uvicorn src.fastapi_iris_predictor.app:app --reload
 
 ## Environment Variables
 
-This project requires the following environment variables, defined in the `.env` file:
+This project requires the following environment variables, defined in the `.env` file.
+
+The `.env.example` file serves as a template with example values, but you must create a `.env` file for local development and to run the application.
 
 | Variable               | Description                          |
 |-------------------------|--------------------------------------|
