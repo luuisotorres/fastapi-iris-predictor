@@ -1,5 +1,7 @@
 # ⚡️ FastAPI Iris Predictor
 
+[![Run on Render](https://img.shields.io/badge/Run%20on-Render-2f3241?logo=render&logoColor=white&style=for-the-badge)](https://fastapi-iris-predictor.onrender.com)
+
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
 ![Poetry](https://img.shields.io/badge/Poetry-1.6.1-4B5162?style=for-the-badge&logo=python)
@@ -24,6 +26,7 @@ This project was inspired by a challenge during my postgraduate studies in Machi
 - [API Docs](#api-docs)
 - [Poetry Usage](#poetry-usage)
 - [Setup](#setup)
+- [Deployment](#deployment)
 - [Environment Variables](#environment-variables)
 - [Logistic Regression Model](#logistic-regression-model)
 - [Notes](#notes)
@@ -63,14 +66,15 @@ fastapi-iris-predictor/
 │   └── fastapi_iris_predictor/
 │       ├── __init__.py
 │       └── app.py              # Main FastAPI app
-├── .env                        # Environment variables
+├── .env                        # Environment variables 
 ├── .env.example                # Example environment file
-├── .gitignore
-├── LICENSE
-├── poetry.lock
-├── predictions.db              # Local SQLite DB
-├── pyproject.toml
-└── README.md
+├── .gitignore                  # Files and folders ignored by Git
+├── LICENSE                     
+├── poetry.lock                 # Locked versions of all installed dependencies for consistent installs
+├── pyproject.toml              # Project metadata and dependency configuration managed by Poetry
+├── predictions.db              # Local SQLite database with stored predictions
+├── README.md                   # Project documentation
+├── render.yaml                 # Setup file for Render deployment
 ```
 
 ---
@@ -185,6 +189,23 @@ If you don't have Poetry installed, you can install it with:
 ```bash
 curl -sSL https://install.python-poetry.org | python3 -
 ```
+
+---
+
+## Deployment
+
+This project is deployed on [Render](https://render.com). You can explore the live API here:
+
+👉 **[Run on Render](https://fastapi-iris-predictor.onrender.com)**
+
+If you’d like to deploy your own version using the included `render.yaml` file, simply fork this repository and connect it to Render. The service will auto-deploy on push to `main`.
+
+The `render.yaml` file contains configuration for:
+- Python version
+- Poetry setup
+- Start command for Uvicorn
+
+No additional configuration is required.
 
 ---
 
