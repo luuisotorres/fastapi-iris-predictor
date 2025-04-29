@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: fastapi-iris
+    env: python
+    buildCommand: poetry install
+    startCommand: poetry run uvicorn src.fastapi_iris_predictor.app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_ALGORITHM
+        sync: false
+      - key: JWT_EXP_DELTA_SECONDS
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: TEST_USERNAME
+        sync: false
+      - key: TEST_PASSWORD
+        sync: false
