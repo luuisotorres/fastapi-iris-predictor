@@ -4,7 +4,9 @@ import os
 import joblib
 import jwt
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from sqlalchemy import Column, DateTime, Float, Integer, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -16,6 +18,10 @@ load_dotenv()
 JWT_SECRET = os.getenv("JWT_SECRET")
 JWT_ALGORITHM = os.getenv("JWT_ALGORITHM")
 JWT_EXP_DELTA_SECONDS = int(os.getenv("JWT_EXP_DELTA_SECONDS", "3600"))
+
+
+# Swagger UI Authorization
+token_auth_scheme = HTTPBearer()
 
 
 # Configure SQLAlchemy
@@ -84,18 +90,16 @@ def create_token(username: str) -> str:
     return token
 
 
-def require_token(request: Request):
+def require_token(
+    credentials: HTTPAuthorizationCredentials = Depends(token_auth_scheme),
+):
     """
     FastAPI dependency that extracts and validates a JWT token from the
     Authorization header.
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        raise HTTPException(status_code=401,
-                            detail="Missing or invalid Authorization header")
-
-    token = auth_header.split(" ")[1]
-
+    token = credentials.credentials
+    if not token:
+        raise HTTPException(status_code=401, detail="Missing token")
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         return payload
@@ -251,3 +255,41 @@ async def list_predictions(limit: int = 10, offset: int = 0,
         return results
     finally:
         db.close()
+
+
+# Create API root
+@app.get("/", response_class=HTMLResponse)
+async def root():
+    """
+    Serves the homepage with a brief description and link to Swagger UI.
+    This endpoint provides a user-friendly entry point to the FastAPI
+    application.
+    """
+    return """
+        <html>
+        <head>
+            <title>FastAPI Iris Predictor</title>
+            <style>
+                body {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                }
+                p {
+                    font-size: 1.2em;
+                }
+            </style>
+        </head>
+        <body>
+            <div>
+                <h1>🚀 FastAPI Iris Predictor</h1>
+                <h3>Welcome to the Iris Prediction API.</h3>
+                <p>👉 <a href="/docs">Access the Swagger UI here</a> to test
+                the endpoints.</p>
+            </div>
+        </body>
+        </html>
+    """
