@@ -1,7 +1,8 @@
 # ⚡️ FastAPI Iris Predictor
 
 [![Run on Render](https://img.shields.io/badge/Run%20on-Render-2f3241?logo=render&logoColor=white&style=for-the-badge)](https://fastapi-iris-predictor.onrender.com)
-
+[![Run on Railway](https://img.shields.io/badge/Run%20on-Railway-2b2e4a?logo=railway&logoColor=white&style=for-the-badge)](https://fastapi-iris-production.up.railway.app/)
+---
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
 ![Poetry](https://img.shields.io/badge/Poetry-1.6.1-4B5162?style=for-the-badge&logo=python)
@@ -9,7 +10,7 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn)
 ![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter)
 
-> 📦 This is a portfolio project showcasing API development, deployment, and JWT-based auth using FastAPI + Poetry.
+>  This is a portfolio project showcasing API development, deployment, and JWT-based auth using FastAPI + Poetry.
 
 Simple API built with [FastAPI](https://fastapi.tiangolo.com/) for real-time predictions on the [Iris flower dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) using a trained Logistic Regression model.
 
@@ -17,7 +18,7 @@ This project was inspired by a challenge during my postgraduate studies in Machi
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Project Structure](#project-structure)
@@ -38,13 +39,13 @@ This project was inspired by a challenge during my postgraduate studies in Machi
 
 ## Features
 
-- ✅ `/login` endpoint with JWT authentication
-- ✅ `/predict` endpoint for making predictions using a trained model
-- ✅ `/predictions` endpoint for listing all predictions stored in SQLite
-- ✅ JWT token expiration logic
-- ✅ Environment-based secret management
-- ✅ SQLite database for persistent storage
-- ✅ API docs auto-generated via Swagger
+-  `/login` endpoint with JWT authentication
+-  `/predict` endpoint for making predictions using a trained model
+-  `/predictions` endpoint for listing all predictions stored in SQLite
+-  JWT token expiration logic
+-  Environment-based secret management
+-  SQLite database for persistent storage
+-  API docs auto-generated via Swagger
 
 ---
 
@@ -195,20 +196,27 @@ curl -sSL https://install.python-poetry.org | python3 -
 
 ## Deployment
 
-This project is deployed on [Render](https://render.com). You can explore the live API here:
+This project is live and accessible on two platforms:
 
-👉 **[Run on Render](https://fastapi-iris-predictor.onrender.com)**
+👉 **[Run on Render](https://fastapi-iris-predictor.onrender.com)**  
+👉 **[Run on Railway](https://fastapi-iris-production.up.railway.app/)**
 
-If you’d like to deploy your own version using the included `render.yaml` file, simply fork this repository and connect it to Render. The service will auto-deploy on push to `main`.
+If you’d like to deploy your own version: 
+- Use the included `render.yaml` file to deploy on **Render** 
+- Or configure a deployment on Railway deployment using a similar setup (e.g., environment variables and poetry commands). 
+
+Both services will **automatically rebuild and redeploy** your API whenever new commits are pushed to `main`.
 
 The `render.yaml` file contains configuration for:
 - Python version
-- Poetry setup
-- Start command for Uvicorn
+- Poetry environment setup
+- Uvicorn start command
+
+For **Railway**:
+- Add environment variables through the dashboard
+- Use `poetry install && poetry run uvicorn src.fastapi_iris_predictor.app:app --host 0.0.0.0 --port $PORT` as the start command
 
 No additional configuration is required.
-
-> **Note:** Render automatically rebuilds and deploys the service whenever new commits are pushed to the `main` branch.
 
 ---
 
