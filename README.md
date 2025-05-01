@@ -53,7 +53,7 @@ This project was inspired by a challenge during my postgraduate studies in Machi
 
 ```
 fastapi-iris-predictor/
-├── assets/                     # Screenshots for documentation
+├── assets/                         # Screenshots for documentation
 │   ├── docs-login.png
 │   ├── docs-page.png
 │   ├── login-postman.png
@@ -61,22 +61,37 @@ fastapi-iris-predictor/
 │   ├── predictions-database.png
 │   └── predictions-postman.png
 ├── models/
-│   └── iris_logreg_model.pkl   # Trained Logistic Regression model
+│   └── iris_logreg_model.pkl       # Trained Logistic Regression model
 ├── notebooks/
-│   └── models.ipynb            # Jupyter notebook for training
-├── src/
-│   └── fastapi_iris_predictor/
-│       ├── __init__.py
-│       └── app.py              # Main FastAPI app
-├── .env                        # Environment variables 
-├── .env.example                # Example environment file
-├── .gitignore                  # Files and folders ignored by Git
-├── LICENSE                     
-├── poetry.lock                 # Locked versions of all installed dependencies for consistent installs
-├── pyproject.toml              # Project metadata and dependency configuration managed by Poetry
-├── predictions.db              # Local SQLite database with stored predictions
-├── README.md                   # Project documentation
-├── render.yaml                 # Setup file for Render deployment
+│   └── models.ipynb                # Jupyter notebook used for training
+├── predictions.db                  # SQLite DB used in dev/demo
+├── poetry.lock                     # Locked versions of all dependencies
+├── pyproject.toml                  # Poetry project metadata and dependencies
+├── README.md                       # Project documentation
+├── render.yaml                     # Configuration for Render deployment
+├── .env                            # Local environment variables
+├── .env.example                    # Example env variables template
+└── src/
+    └── fastapi_iris_predictor/
+        ├── __init__.py
+        ├── app.py                  # Main FastAPI app entrypoint
+        ├── auth/                   # JWT auth logic
+        │   ├── __init__.py
+        │   └── jwt_handler.py
+        ├── config/                 # Environment configuration settings
+        │   ├── __init__.py
+        │   └── settings.py
+        ├── database/               # SQLAlchemy setup and models
+        │   ├── __init__.py
+        │   ├── base.py
+        │   └── models.py
+        ├── routes/                 # API route definitions
+        │   ├── __init__.py
+        │   ├── auth_routes.py
+        │   └── routes.py
+        └── schemas/                # Pydantic request models
+            ├── __init__.py
+            └── IrisInput.py
 ```
 
 ---
