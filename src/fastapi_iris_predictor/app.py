@@ -115,7 +115,7 @@ model_path = os.path.join(current_dir, "../../models/iris_logreg_model.pkl")
 model = joblib.load(model_path)
 
 
-# Initialize FastAPI app
+# Initialize FastAPI app 
 app = FastAPI(
     title="FastAPI Iris Predictor",
     version="0.1.0",
