@@ -289,6 +289,8 @@ async def root():
                 <h3>Welcome to the Iris Prediction API.</h3>
                 <p>👉 <a href="/docs">Access the Swagger UI here</a> to test
                 the endpoints.</p>
+                <p>👉 <a href="/redoc">Access the ReDoc documentation here</a>
+                to explore the endpoints.</p>
             </div>
         </body>
         </html>
