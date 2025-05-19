@@ -198,7 +198,7 @@ This project uses [Poetry](https://python-poetry.org/) for dependency management
 Example (running the FastAPI app):
 
 ```bash
-poetry run uvicorn src.fastapi_iris_predictor.app:app --reload
+PYTHONPATH=src poetry run uvicorn fastapi_iris_predictor.app:app --reload
 ```
 
 If you don't have Poetry installed, you can install it with:
